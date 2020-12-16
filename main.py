@@ -8,11 +8,27 @@ import db
 from db import database_docs, DocInDB
 from datetime import date
 from typing import Dict
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
 today = date.today()
 
+origins = [
+    "https://ticdrive-ciclo3.herokuapp.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8081",
+    "http://localhost:8081"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/listfiles")
 async def files():
@@ -22,9 +38,19 @@ async def files():
 async def create_upload_file(iddoc:int,fecvencimientodoc:str,
                 nomdoc:str,
                 idusuario:int,uploaded_file: UploadFile = File(...)):
-    file_location = f"uploadfiles/{uploaded_file.filename}"
-    with open(file_location, "wb+") as file_object:
-        file_object.write(uploaded_file.file.read())
+#codigo antiguo
+#   file_location = f"uploadfiles/{uploaded_file.filename}"
+#   with open(file_location, "wb+") as file_object:
+#       file_object.write(uploaded_file.file.read())
+# fin codigo antiguo
+       
+#nuevo codigo
+    file_to = '/' + uploaded_file.filename
+#conexion con DrpBox
+    dbx = dropbox.Dropbox('ZLnvyxN_O3oAAAAAAAAAAROUWKg5XPiHwDd4fH-djVUAfupDPYiVJuayBgJJWsxA')
+    #dbx.files_upload(open(file_from, 'rb').read(), file_to)
+    dbx.files_upload(uploaded_file.file.read(), file_to)
+#fin nuevo codigo
     if iddoc in database_docs:
        raise HTTPException(status_code=406, detail="El documento ya existe!")
     else:
@@ -34,13 +60,5 @@ async def create_upload_file(iddoc:int,fecvencimientodoc:str,
                                             "fecvencimientodoc": fecvencimientodoc,
                                             "pathdoc": "/uploadfiles/" + uploaded_file.filename,
                                             "idusuario": idusuario})
-    return {"info": f"file '{uploaded_file.filename}' saved at '{file_location}'"}
-
-@app.post("/descripcion-file/")
-async def descripcion_file(datos:DocInDB):
-
-    if datos.iddoc in database_docs:
-       raise HTTPException(status_code=406, detail="El documento ya existe!")
-    else:
-        database_docs[datos.iddoc] = datos  
-    return {"mensaje": "Documento Creado"}
+    return {"info": f"Archivo '{uploaded_file.filename}' ha sido cargado en dropbox y la informacion ha sido grabada con exito"}
+#   return {"info": f"Archivo '{uploaded_file.filename}' ha sido cargado en '{file_location}' y la informacion ha sido grabada con exito"}
