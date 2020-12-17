@@ -15,8 +15,8 @@ app = FastAPI()
 today = date.today()
 
 origins = [
-    "localhost.tiangolo.com", 
-    "localhost.tiangolo.com",
+    "https://localhost.tiangolo.com", 
+    "https://localhost.tiangolo.com",
     "localhost",
     "localhost:8081",
     "http://181.131.100.129",
