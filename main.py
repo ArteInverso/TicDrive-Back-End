@@ -15,7 +15,6 @@ app = FastAPI()
 today = date.today()
 
 origins = [
-    "https://drivetic.herokuapp.com",
     "localhost.tiangolo.com", 
     "localhost.tiangolo.com",
     "localhost",
