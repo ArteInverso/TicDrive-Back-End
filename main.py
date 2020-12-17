@@ -16,7 +16,7 @@ app = FastAPI()
 today = date.today()
 
 origins = [
-    "https://ticdrive-front.herokuapp.com/",
+    "https://ticdrive-front.herokuapp.com",
     "https://localhost.tiangolo.com", 
     "https://localhost.tiangolo.com",
     "http://localhost",
