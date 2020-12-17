@@ -16,6 +16,10 @@ today = date.today()
 
 origins = [
     "https://drivetic.herokuapp.com",
+    "localhost.tiangolo.com", 
+    "localhost.tiangolo.com",
+    "localhost",
+    "localhost:8081",
     "http://181.131.100.129",
     "http://181.131.100.129:8081"
 ]
