@@ -16,8 +16,8 @@ today = date.today()
 
 origins = [
     "https://drivetic.herokuapp.com/*",
-    "http://localhost:8081",
-    "http://localhost:8081"
+    "http://181.131.100.129:8081",
+    "http://181.131.100.129:8081"
 ]
 
 app.add_middleware(
