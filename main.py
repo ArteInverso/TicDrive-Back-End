@@ -5,6 +5,7 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.responses import HTMLResponse
 import pydantic
 import db
+import dropbox
 from db import database_docs, DocInDB
 from datetime import date
 from typing import Dict
@@ -43,7 +44,7 @@ async def create_upload_file(iddoc:int,fecvencimientodoc:str,
 #   file_location = f"uploadfiles/{uploaded_file.filename}"
 #   with open(file_location, "wb+") as file_object:
 #       file_object.write(uploaded_file.file.read())
-# fin codigo antiguo
+# fin de codigo antiguo
        
 #nuevo codigo
     file_to = '/' + uploaded_file.filename
