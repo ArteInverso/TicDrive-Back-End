@@ -17,8 +17,8 @@ today = date.today()
 origins = [
     "https://localhost.tiangolo.com", 
     "https://localhost.tiangolo.com",
-    "localhost",
-    "localhost:8081",
+    "http://localhost",
+    "http://localhost:8081",
     "http://181.131.100.129",
     "http://181.131.100.129:8081"
 ]
